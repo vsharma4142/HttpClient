@@ -57,31 +57,7 @@ namespace ETL.API.Controllers
                     var client = _clientFactory.CreateClient();
                     HttpResponseMessage response = await client.PostAsync("http://localhost:7140/Customer", payload);
                     string responseJson = await response.Content.ReadAsStringAsync();
-                    //using (var client = new HttpClient())
-                    //{
-                    //    try
-                    //    {
-
-                    //        // return URI of the created resource.
-                    //        //var i = response.Headers.Location;
-                    //        client.BaseAddress = new Uri("http://localhost:7140/");//WebApi 1 project URL
-                    //        client.DefaultRequestHeaders.Accept.Clear();
-                    //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    //        StringContent content = new StringContent(JsonConvert.SerializeObject(lstbatchData), Encoding.UTF8, "application/json");
-                    //        var response = await client.PostAsJsonAsync("http://localhost:7140/Customer", accountType);
-                    //        if (response.IsSuccessStatusCode)
-                    //        {
-                    //            responseString = response.Content.ReadAsStringAsync().Result;
-                    //            var accountTypeResult = response.Content.ReadFromJsonAsync<AccountType>().Result;
-                    //        }
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        throw ex;
-                    //    }
-
-
-                    //}
+                   
                 }
                 batchIncrement++;
 
