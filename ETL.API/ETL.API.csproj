@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ETL.Data\ETL.Data.csproj" />
     <ProjectReference Include="..\ETL.JWT\ETL.JWT.csproj" />
+    <ProjectReference Include="..\ETL.SalesForce\ETL.SalesForce.csproj" />
     <ProjectReference Include="..\ETL.Services\ETL.Services.csproj" />
   </ItemGroup>
 

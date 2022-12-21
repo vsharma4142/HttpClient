@@ -1,5 +1,6 @@
 using ETL.Data.Models;
 using ETL.JWT;
+using ETL.SalesForce;
 using ETL.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -56,9 +57,11 @@ builder.Services.AddSwaggerGen(o =>
     o.AddSecurityRequirement(securityReq);
 });
 builder.Services.Configure<ExternalClientJsonConfiguration>(builder.Configuration.GetSection("ExternalClientServer"));
+builder.Services.Configure<SalesforceClinetConfiguration>(builder.Configuration.GetSection("Salesforce"));
 builder.Services.AddDbContext<ETLDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnStr")));
 builder.Services.TryAddScoped<IAccountService, AccountService>();
 builder.Services.TryAddScoped<ICustomerService, CustomerService>();
+builder.Services.TryAddScoped<ISalesForceHandler, SalesForceHandler>();
 builder.Services.AddTransient<IJwtHandler, JwtHandler>();
 builder.Services.AddControllers();
 

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETL.Services", "ETL.Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETL.JWT", "ETL.JWT\ETL.JWT.csproj", "{BB754CBA-9A1B-46EE-BB11-0337A1BBF5CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETL.SalesForce", "ETL.SalesForce\ETL.SalesForce.csproj", "{E0D2D035-65E3-4747-A04E-8DD591751AE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BB754CBA-9A1B-46EE-BB11-0337A1BBF5CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB754CBA-9A1B-46EE-BB11-0337A1BBF5CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB754CBA-9A1B-46EE-BB11-0337A1BBF5CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0D2D035-65E3-4747-A04E-8DD591751AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0D2D035-65E3-4747-A04E-8DD591751AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0D2D035-65E3-4747-A04E-8DD591751AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0D2D035-65E3-4747-A04E-8DD591751AE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,6 @@
 ﻿using ETL.Data.Models;
 using ETL.JWT;
+using ETL.SalesForce;
 using ETL.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -13,11 +14,13 @@ namespace ETL.API.Controllers
     {
         private ICustomerService _customerRepository;
         private readonly IJwtHandler _jwtHandler;
+        private readonly ISalesForceHandler _salesForceHandler;
 
-        public CustomerController(ICustomerService customerRepository, IJwtHandler jwtHandler)
+        public CustomerController(ICustomerService customerRepository, IJwtHandler jwtHandler, ISalesForceHandler salesForceHandler)
         {
             _customerRepository = customerRepository;
             _jwtHandler = jwtHandler;
+            _salesForceHandler = salesForceHandler;
         }
         [HttpPost(Name = "Update Customer")]
         public async Task<IActionResult> PostAsync(IEnumerable<Customer> customers)
@@ -28,11 +31,15 @@ namespace ETL.API.Controllers
             }
             return Ok();
         }
-        [Authorize]
+        // [Authorize]
         [HttpGet(Name = "Get Customers")]
         public async Task<IActionResult> GetCustomers(int id)
         {
-
+            var resultObject = _salesForceHandler.Login();
+            string AuthToken = (string)resultObject["access_token"];
+            string ServiceUrl = (string)resultObject["instance_url"];
+           _salesForceHandler.CreateAccount(AuthToken,ServiceUrl);
+            //_salesForceHandler.GetData(AuthToken, ServiceUrl);
             var result = await _customerRepository.GetCustomer();
 
             return Ok();
