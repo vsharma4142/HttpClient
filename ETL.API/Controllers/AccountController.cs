@@ -2,6 +2,7 @@
 using ETL.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -34,7 +35,8 @@ namespace ETL.API.Controllers
             var bachCount = totalRecords / 6;
 
             int batchIncrement = 1;
-            List<AccountType> lstbatchData = new List<AccountType>();
+            int pk = 1;
+            List<Customer> lstbatchData = new List<Customer>();
             foreach (var data in result)
             {
                 if (batchIncrement > bachCount)
@@ -42,24 +44,36 @@ namespace ETL.API.Controllers
                     batchIncrement = 1;
                     lstbatchData.Clear();
                 }
-                AccountType accountType = new AccountType();
-                accountType.AccontCatageory = data.AccontCatageory;
-                accountType.AccountRegion = data.AccountRegion;
-                accountType.AccountType1 = data.AccountType;
+                Customer customer = new()
+                {
+                    CustomerId = pk,
+                    CustomerRegion = data.AccountRegion,
+                    CustomerName = "jacob"+ pk.ToString(),
+                    Ssn = "999 0000"+ pk.ToString(),
+                    Phone = "1 9999 0000" + pk.ToString(),
+                    AccountId = data.AccountId
+                };
 
-                lstbatchData.Add(accountType);
+                lstbatchData.Add(customer);
                 string responseString = string.Empty;
                 if (batchIncrement == bachCount)
                 {
+                    try
+                    {
+                        string jsonString = JsonConvert.SerializeObject(lstbatchData);
+                        var payload = new StringContent(jsonString, Encoding.UTF8, "application/json");
+                        var client = _clientFactory.CreateClient();
+                        HttpResponseMessage response = await client.PostAsync("https://localhost:7140/Customer", payload);
+                        string responseJson = await response.Content.ReadAsStringAsync();
+                    }
+                    catch(Exception ex)
+                    {
 
-                    string jsonString = JsonConvert.SerializeObject(accountType);
-                    var payload = new StringContent(jsonString, Encoding.UTF8, "application/json");
-                    var client = _clientFactory.CreateClient();
-                    HttpResponseMessage response = await client.PostAsync("http://localhost:7140/Customer", payload);
-                    string responseJson = await response.Content.ReadAsStringAsync();
-                   
+                    }
+
                 }
                 batchIncrement++;
+                pk++;
 
             }
 

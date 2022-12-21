@@ -31,7 +31,10 @@ public partial class ETLDbContext : DbContext
             entity
                 .HasNoKey()
                 .ToView("AccountDetails");
-
+            entity.Property(e => e.AccountId)
+               .HasMaxLength(50)
+               .IsUnicode(false)
+               .HasColumnName("AccountId");
             entity.Property(e => e.AccontCatageory)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -44,19 +47,7 @@ public partial class ETLDbContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("Account Type");
-            entity.Property(e => e.CustomerName)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("Customer Name");
-            entity.Property(e => e.CustomerRegion)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("Customer Region");
-            entity.Property(e => e.Phone).HasMaxLength(50);
-            entity.Property(e => e.Ssn)
-                .HasMaxLength(20)
-                .IsFixedLength()
-                .HasColumnName("SSN");
+            
         });
 
         modelBuilder.Entity<AccountType>(entity =>
