@@ -27,6 +27,8 @@ namespace ETL.API.Controllers
         {
             var result = await _accountRepository.GetAccountDetails();
 
+
+
             var totalRecords = result.Count();
             //max recound one request=2
             //max req per day =5

@@ -16,6 +16,8 @@ namespace ETL.SalesForce
 
 
         public string APIEndPoint { get; set; }//version
+        public string APIEndPointBulkJob { get; set; }//version
+        public string APIEndPointBulkInsert { get; set; }//version
         public string LoginEndPoint { get; set; } //url
         public string UserName { get; set; }
         public string Password { get; set; }

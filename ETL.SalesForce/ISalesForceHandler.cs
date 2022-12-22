@@ -17,5 +17,7 @@ namespace ETL.SalesForce
         void PostData();
         void PushData();
 
+        void BulkUpsert(string token);
+
     }
 }

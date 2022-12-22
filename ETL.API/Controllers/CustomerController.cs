@@ -38,7 +38,9 @@ namespace ETL.API.Controllers
             var resultObject = _salesForceHandler.Login();
             string AuthToken = (string)resultObject["access_token"];
             string ServiceUrl = (string)resultObject["instance_url"];
-           _salesForceHandler.CreateAccount(AuthToken,ServiceUrl);
+            _salesForceHandler.GetData(AuthToken, ServiceUrl);
+            _salesForceHandler.BulkUpsert(AuthToken);
+           //_salesForceHandler.CreateAccount(AuthToken,ServiceUrl);
             //_salesForceHandler.GetData(AuthToken, ServiceUrl);
             var result = await _customerRepository.GetCustomer();
 
